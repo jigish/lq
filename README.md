@@ -1,5 +1,5 @@
 # lq
-simple command line tool to pretty print and filter logs
+simple command line tool to pretty print and filter logs. reads from stdin.
 
 ## Installation
 
@@ -11,7 +11,7 @@ $ go install github.com/jigish/lq@latest
 
 ```
 $ lq --help
-lq is a simple log pretty printer and filter
+lq is a simple log pretty printer and filter. reads from stdin.
 
 Usage:
   lq [flags]

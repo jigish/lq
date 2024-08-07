@@ -17,6 +17,7 @@ const rfc3339Milli = "2006-01-02T15:04:05.000Z07:00"
 var rootCmd = &cobra.Command{
 	Use:   "lq",
 	Short: "lq is a simple log pretty printer and filter",
+	Long:  "lq is a simple log pretty printer and filter. reads from stdin.",
 	Run:   root,
 }
 
