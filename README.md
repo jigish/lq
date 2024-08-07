@@ -1,6 +1,14 @@
 # lq
 simple command line tool to pretty print and filter logs
 
+## Installation
+
+```
+$ go install github.com/jigish/lq
+```
+
+## Usage
+
 ```
 lq is a simple log pretty printer and filter
 
@@ -43,6 +51,6 @@ Flags:
 ```
 
 
-### Credits
+## Credits
 
 `lq` is inspired by [`humanlog`](https://github.com/humanlogio/humanlog) and leverages [`zerolog`](https://github.com/rs/zerolog) for pretty printing.
