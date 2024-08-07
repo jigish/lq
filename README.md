@@ -4,7 +4,7 @@ simple command line tool to pretty print and filter logs
 ## Installation
 
 ```
-$ go install github.com/jigish/lq
+$ go install github.com/jigish/lq@latest
 ```
 
 ## Usage
