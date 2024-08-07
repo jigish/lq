@@ -10,6 +10,7 @@ $ go install github.com/jigish/lq@latest
 ## Usage
 
 ```
+$ lq --help
 lq is a simple log pretty printer and filter
 
 Usage:
@@ -21,7 +22,7 @@ Flags:
   -h, --help                                      help for lq
   -i, --include strings                           only print these extra fields
       --level-field string                        level field name (default "level")
-  -m, --match strings                             print log lines only when the given field string regex matches the given value. format: field=value
+  -m, --match strings                             print log lines only when the given field string equals the given value. format: field=value
       --match-duration strings                    print log lines only when the given field duration equals the given value. format: field=value
       --match-duration-greater strings            print log lines only when the given field duration is greater than the given value. format: field>value
       --match-duration-greater-or-equal strings   print log lines only when the given field duration is greater than or equals the given value. format: field>=value
@@ -37,6 +38,7 @@ Flags:
       --match-int-greater-or-equal strings        print log lines only when the given field int is greater than or equals the given value. format: field>=value
       --match-int-less strings                    print log lines only when the given field int is less than the given value. format: field<value
       --match-int-less-or-equal strings           print log lines only when the given field int is less than or equals the given value. format: field<=value
+  -M, --match-regex strings                       print log lines only when the given field string regex matches the given value. format: field=value
       --match-time strings                        print log lines only when the given field time equals the given value. format: field=value
       --match-time-after strings                  print log lines only when the given field time is after the given value. format: field>value
       --match-time-after-or-equal strings         print log lines only when the given field time is after or equals the given value. format: field>=value

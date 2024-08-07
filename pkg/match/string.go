@@ -11,24 +11,46 @@ func init() {
 		new:         newStringMatcher,
 		name:        "match",
 		short:       "m",
+		description: "string equals",
+	}, &definition{
+		new:         newStringRegexMatcher,
+		name:        "match-regex",
+		short:       "M",
 		description: "string regex matches",
 	})
 }
 
 type stringMatcher struct {
+	Field string
+	Value string
+}
+
+func newStringMatcher(field, value string) (Matcher, error) {
+	return &stringMatcher{
+		Field: field,
+		Value: value,
+	}, nil
+}
+
+func (f *stringMatcher) Matches(e event.Event) bool {
+	value, ok := extractString(e, f.Field)
+	return ok && f.Value == value
+}
+
+type stringRegexMatcher struct {
 	Field  string
 	Regexp *regexp.Regexp
 }
 
-func newStringMatcher(field, value string) (Matcher, error) {
+func newStringRegexMatcher(field, value string) (Matcher, error) {
 	r, err := regexp.Compile(value)
-	return &stringMatcher{
+	return &stringRegexMatcher{
 		Field:  field,
 		Regexp: r,
 	}, err
 }
 
-func (f *stringMatcher) Matches(e event.Event) bool {
+func (f *stringRegexMatcher) Matches(e event.Event) bool {
 	value, ok := extractString(e, f.Field)
 	return ok && f.Regexp.MatchString(value)
 }
