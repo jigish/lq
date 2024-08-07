@@ -3,6 +3,7 @@ module github.com/jigish/lq
 go 1.22.5
 
 require (
+	github.com/kr/logfmt v0.0.0-20210122060352-19f9bcb100e6
 	github.com/pkg/errors v0.9.1
 	github.com/rs/zerolog v1.33.0
 	github.com/spf13/cobra v1.8.1

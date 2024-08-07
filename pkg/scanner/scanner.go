@@ -4,7 +4,11 @@ import (
 	"bufio"
 	"context"
 	"encoding/json"
+	"fmt"
 	"io"
+	"strings"
+
+	"github.com/kr/logfmt"
 
 	"github.com/jigish/lq/pkg/event"
 )
@@ -32,19 +36,53 @@ func (s *Scanner) Scan(ctx context.Context) {
 }
 
 func (s *Scanner) sendLine(line []byte) {
-	var e event.Map
-
 	switch s.Format {
-	case FormatJSON:
-		if err := json.Unmarshal(line, &e); err != nil {
-			s.c <- event.InvalidFormat(line)
-			return
+	case FormatAuto:
+		if isJSON(string(line)) {
+			s.sendJSON(line)
+		} else {
+			s.sendLogFmt(line)
 		}
+	case FormatLogFmt:
+		s.sendLogFmt(line)
+	case FormatJSON:
+		s.sendJSON(line)
 	default:
 		s.c <- event.Error("unimplemented format: " + s.Options.Format)
 		return
 	}
+}
 
+func isJSON(line string) bool {
+	return strings.HasPrefix(strings.TrimSpace(line), "{")
+}
+
+func (s *Scanner) sendJSON(line []byte) {
+	var e event.Map
+	if err := json.Unmarshal(line, &e); err != nil {
+		s.c <- event.InvalidFormat(line)
+		return
+	}
+	s.c <- e
+}
+
+func unmarshalLogFmtSafe(line []byte) (e event.Map, err error) {
+	defer func() {
+		if x := recover(); x != nil {
+			err = fmt.Errorf("runtime panic: %v", x)
+		}
+	}()
+
+	err = logfmt.Unmarshal(line, &e)
+	return
+}
+
+func (s *Scanner) sendLogFmt(line []byte) {
+	e, err := unmarshalLogFmtSafe(line)
+	if err != nil {
+		s.c <- event.InvalidFormat(line)
+		return
+	}
 	s.c <- e
 }
 

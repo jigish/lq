@@ -28,8 +28,8 @@ var (
 
 func init() {
 	// scanner options
-	rootCmd.Flags().StringVarP(&sOpts.Format, "format", "f", scanner.FormatJSON,
-		"incoming log line format: only '"+scanner.FormatJSON+"' is supported as of now")
+	rootCmd.Flags().StringVarP(&sOpts.Format, "format", "f", scanner.FormatAuto,
+		"incoming log line format: "+scanner.FormatJSON+", "+scanner.FormatLogFmt+", or "+scanner.FormatAuto)
 
 	// printer options
 	rootCmd.Flags().BoolVarP(&pOpts.Quiet, "quiet", "q", false, "quiet all internal error logging")

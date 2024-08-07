@@ -18,7 +18,7 @@ Usage:
 
 Flags:
   -e, --exclude strings                           do not print these extra fields
-  -f, --format string                             incoming log line format: only 'json' is supported as of now (default "json")
+  -f, --format string                             incoming log line format: json, logfmt, or auto (default "auto")
   -h, --help                                      help for lq
   -i, --include strings                           only print these extra fields
       --level-field string                        level field name (default "level")
