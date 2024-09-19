@@ -38,9 +38,9 @@ func init() {
 	rootCmd.Flags().StringSliceVarP(&pOpts.Excludes, "exclude", "e", nil, "do not print these extra fields")
 	rootCmd.Flags().StringVar(&pOpts.TimestampFormat, "timestamp-format", rfc3339Milli,
 		"timestamp format (see https://pkg.go.dev/time#pkg-constants)")
-	rootCmd.Flags().StringVar(&zerolog.TimestampFieldName, "timestamp-field", "ts", "timestamp field name")
-	rootCmd.Flags().StringVar(&zerolog.LevelFieldName, "level-field", "level", "level field name")
-	rootCmd.Flags().StringVar(&zerolog.MessageFieldName, "message-field", "msg", "message field name")
+	rootCmd.Flags().StringVar(&zerolog.TimestampFieldName, "timestamp-field", "auto", "timestamp field name")
+	rootCmd.Flags().StringVar(&zerolog.LevelFieldName, "level-field", "auto", "level field name")
+	rootCmd.Flags().StringVar(&zerolog.MessageFieldName, "message-field", "auto", "message field name")
 
 	// match options
 	rootCmd.Flags().StringVar(&match.TimeFormat, "match-time-format", rfc3339Milli,
