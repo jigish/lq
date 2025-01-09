@@ -11,6 +11,7 @@ import (
 var (
 	timestampFields = []string{
 		"ts",
+		"time",
 		"timestamp",
 		"@timestamp",
 	}
