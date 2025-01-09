@@ -3,6 +3,7 @@ package cmd
 import (
 	"fmt"
 	"os"
+	"time"
 
 	"github.com/rs/zerolog"
 	"github.com/spf13/cobra"
@@ -11,8 +12,6 @@ import (
 	"github.com/jigish/lq/pkg/printer"
 	"github.com/jigish/lq/pkg/scanner"
 )
-
-const rfc3339Milli = "2006-01-02T15:04:05.000Z07:00"
 
 var rootCmd = &cobra.Command{
 	Use:   "lq",
@@ -36,14 +35,14 @@ func init() {
 	rootCmd.Flags().BoolVar(&pOpts.PrintInvalidFormat, "print-invalid-format", false, "print lines with invalid format")
 	rootCmd.Flags().StringSliceVarP(&pOpts.Includes, "include", "i", nil, "only print these extra fields")
 	rootCmd.Flags().StringSliceVarP(&pOpts.Excludes, "exclude", "e", nil, "do not print these extra fields")
-	rootCmd.Flags().StringVar(&pOpts.TimestampFormat, "timestamp-format", rfc3339Milli,
+	rootCmd.Flags().StringVar(&pOpts.TimestampFormat, "timestamp-format", time.RFC3339Nano,
 		"timestamp format (see https://pkg.go.dev/time#pkg-constants)")
 	rootCmd.Flags().StringVar(&zerolog.TimestampFieldName, "timestamp-field", "auto", "timestamp field name")
 	rootCmd.Flags().StringVar(&zerolog.LevelFieldName, "level-field", "auto", "level field name")
 	rootCmd.Flags().StringVar(&zerolog.MessageFieldName, "message-field", "auto", "message field name")
 
 	// match options
-	rootCmd.Flags().StringVar(&match.TimeFormat, "match-time-format", rfc3339Milli,
+	rootCmd.Flags().StringVar(&match.TimeFormat, "match-time-format", time.RFC3339Nano,
 		"time format for --match-time* (see https://pkg.go.dev/time#pkg-constants)")
 
 	match.AddFlags(rootCmd)

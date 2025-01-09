@@ -10,16 +10,20 @@ import (
 
 var (
 	timestampFields = []string{
+		"t",
 		"ts",
 		"time",
 		"timestamp",
 		"@timestamp",
 	}
 	levelFields = []string{
+		"l",
+		"lvl",
 		"level",
 		"log.level",
 	}
 	messageFields = []string{
+		"m",
 		"msg",
 		"message",
 	}
